@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CleanWash Laundry</title>
+
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
@@ -90,7 +92,7 @@
         <section id="pesanan">
             <h2>Form Pemesanan Laundry</h2>
 
-            <form>
+            <form id="orderForm">
 
                 <label for="nama">Nama Pelanggan:</label><br>
                 <input type="text" id="nama" name="nama"
@@ -108,7 +110,7 @@
                 <br><br>
 
                 <label for="layanan">Pilih Layanan:</label><br>
-                <select id="layanan" name="layanan" required>
+                <select id="layananPesanan" name="layanan" required>
                     <option value="">-- Pilih Layanan --</option>
                     <option value="kiloan">Laundry Kiloan</option>
                     <option value="cuci-setrika">Cuci + Setrika</option>
@@ -137,6 +139,25 @@
 
             </form>
         </section>
+        <section id="Riwayat">
+           <h2>Riwayat Pesanan</h2>
+
+<table border="1" id="tabelRiwayat">
+    <thead>
+        <tr>
+            <th>No</th>
+            <th>Nama Pelanggan</th>
+            <th>Produk</th>
+            <th>Harga Satuan</th>
+            <th>Jumlah</th>
+            <th>Total</th>
+            <th>Kategori Pelanggan</th>
+        </tr>
+    </thead>
+
+    <tbody id="riwayatPesanan"></tbody>
+</table>
+        </section>
 
     </main>
 
@@ -147,6 +168,7 @@
             <a href="mailto:cleanwash@gmail.com">email CleanWash</a>
         </p>
     </footer>
+    <script src="script.js"></script>
 
 </body>
 </html>
