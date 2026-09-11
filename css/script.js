@@ -1,109 +1,238 @@
-// Mengambil elemen HTML dengan getElementById
+// ================================
+// CLEANWASH LAUNDRY
+// JavaScript Form Pemesanan
+// ================================
+
+
+// ================================
+// MENGAMBIL ELEMEN HTML
+// ================================
+
 const orderForm = document.getElementById("orderForm");
+
 const nama = document.getElementById("nama");
-const layananPesanan = document.getElementById("layananPesanan");
-const hargaSatuan = document.getElementById("hargaSatuan");
-const jumlah = document.getElementById("jumlah");
-const kategoriPelanggan = document.getElementById("kategoriPelanggan");
+const email = document.getElementById("email");
+const telepon = document.getElementById("telepon");
+
+const layanan = document.getElementById("layananPesanan");
+
+const berat = document.getElementById("berat");
 const tanggal = document.getElementById("tanggal");
-const hasilPerhitungan = document.getElementById("hasilPerhitungan");
-const riwayatBody = document.getElementById("riwayatBody");
+const alamat = document.getElementById("alamat");
+
+const riwayatPesanan = document.getElementById("riwayatPesanan");
+
+
+// ================================
+// HARGA LAYANAN
+// ================================
 
 const hargaLayanan = {
     kiloan: 7000,
     "cuci-setrika": 9000,
     setrika: 5000,
-    express: 12000,
-    "bed-cover": 20000
+    express: 12000
 };
+
+
+// ================================
+// NAMA LAYANAN
+// ================================
 
 const namaLayanan = {
     kiloan: "Laundry Kiloan",
     "cuci-setrika": "Cuci + Setrika",
     setrika: "Setrika",
-    express: "Express",
-    "bed-cover": "Bed Cover"
+    express: "Laundry Express"
 };
 
-// Mengisi harga otomatis ketika layanan dipilih
-layananPesanan.addEventListener("change", function () {
-    hargaSatuan.value = hargaLayanan[this.value] || "";
-});
 
-// Format angka menjadi Rupiah
-function formatRupiah(angka) {
-    return new Intl.NumberFormat("id-ID", {
-        style: "currency",
-        currency: "IDR",
-        maximumFractionDigits: 0
-    }).format(angka);
-}
+// ================================
+// FORM SUBMIT
+// ================================
 
-// Menghitung transaksi
-orderForm.addEventListener("submit", function (event) {
+orderForm.addEventListener("submit", function(event) {
+
+    // Mencegah halaman reload
     event.preventDefault();
 
-    const harga = Number(hargaSatuan.value);
-    const qty = Number(jumlah.value);
-    const namaPelanggan = nama.value.trim();
-    const layanan = layananPesanan.value;
-    const kategori = kategoriPelanggan.value;
 
-    if (!harga || !qty || !namaPelanggan || !layanan || !kategori) {
-        hasilPerhitungan.textContent =
-            "Mohon lengkapi data pemesanan terlebih dahulu.";
+    // ================================
+    // MENGAMBIL DATA FORM
+    // ================================
+
+    const namaPelanggan = nama.value.trim();
+
+    const emailPelanggan = email.value.trim();
+
+    const nomorTelepon = telepon.value.trim();
+
+    const layananDipilih = layanan.value;
+
+    const beratLaundry = Number(berat.value);
+
+    const tanggalPengantaran = tanggal.value;
+
+    const alamatPelanggan = alamat.value.trim();
+
+
+    // ================================
+    // VALIDASI DATA
+    // ================================
+
+    if (
+        namaPelanggan === "" ||
+        emailPelanggan === "" ||
+        nomorTelepon === "" ||
+        layananDipilih === "" ||
+        beratLaundry <= 0 ||
+        tanggalPengantaran === "" ||
+        alamatPelanggan === ""
+    ) {
+
+        alert("Mohon lengkapi semua data pesanan terlebih dahulu.");
+
         return;
     }
 
-    let diskon = 0;
 
-    if (kategori === "member") {
-        diskon = 0.05;
-    } else if (kategori === "vip") {
-        diskon = 0.10;
-    }
+    // ================================
+    // MENGAMBIL HARGA
+    // ================================
 
-    const subtotal = harga * qty;
-    const nilaiDiskon = subtotal * diskon;
-    const total = subtotal - nilaiDiskon;
+    const hargaSatuan = hargaLayanan[layananDipilih];
 
-    // Menampilkan hasil menggunakan textContent
-    hasilPerhitungan.textContent =
-        `Pesanan ${namaPelanggan}: ${namaLayanan[layanan]} × ${qty}. ` +
-        `Subtotal ${formatRupiah(subtotal)}, ` +
-        `diskon ${formatRupiah(nilaiDiskon)}, ` +
-        `total ${formatRupiah(total)}.`;
 
-    // Membuat baris baru menggunakan createElement
-    const row = document.createElement("tr");
+    // ================================
+    // MENGHITUNG TOTAL
+    // ================================
 
-    const data = [
-        namaPelanggan,
-        namaLayanan[layanan],
-        `${qty}`,
-        formatRupiah(total),
-        kategori.toUpperCase()
-    ];
+    const totalHarga = hargaSatuan * beratLaundry;
 
-    data.forEach(function (item) {
-        const cell = document.createElement("td");
 
-        cell.textContent = item;
+    // ================================
+    // MEMBUAT BARIS BARU
+    // ================================
 
-        row.appendChild(cell);
-    });
+    const baris = document.createElement("tr");
 
-    // Menambahkan baris ke tabel
-    riwayatBody.appendChild(row);
 
-    alert("Pesanan berhasil dihitung dan disimpan.");
-});
+    // ================================
+    // KOLOM NO
+    // ================================
 
-// Reset form
-orderForm.addEventListener("reset", function () {
-    setTimeout(function () {
-        hargaSatuan.value = "";
-        hasilPerhitungan.textContent =
-            "Hasil perhitungan akan tampil di sini.";
-    }, 0);
+    const kolomNo = document.createElement("td");
+
+    kolomNo.textContent =
+        riwayatPesanan.children.length + 1;
+
+
+    // ================================
+    // KOLOM NAMA PELANGGAN
+    // ================================
+
+    const kolomNama = document.createElement("td");
+
+    kolomNama.textContent =
+        namaPelanggan;
+
+
+    // ================================
+    // KOLOM PRODUK
+    // ================================
+
+    const kolomProduk = document.createElement("td");
+
+    kolomProduk.textContent =
+        namaLayanan[layananDipilih];
+
+
+    // ================================
+    // KOLOM HARGA SATUAN
+    // ================================
+
+    const kolomHarga = document.createElement("td");
+
+    kolomHarga.textContent =
+        "Rp" + hargaSatuan.toLocaleString("id-ID");
+
+
+    // ================================
+    // KOLOM JUMLAH
+    // ================================
+
+    const kolomJumlah = document.createElement("td");
+
+    kolomJumlah.textContent =
+        beratLaundry + " kg";
+
+
+    // ================================
+    // KOLOM TOTAL
+    // ================================
+
+    const kolomTotal = document.createElement("td");
+
+    kolomTotal.textContent =
+        "Rp" + totalHarga.toLocaleString("id-ID");
+
+
+    // ================================
+    // KOLOM KATEGORI PELANGGAN
+    // ================================
+
+    const kolomKategori = document.createElement("td");
+
+    kolomKategori.textContent =
+        "Pelanggan";
+
+
+    // ================================
+    // MEMASUKKAN KOLOM KE BARIS
+    // ================================
+
+    baris.appendChild(kolomNo);
+
+    baris.appendChild(kolomNama);
+
+    baris.appendChild(kolomProduk);
+
+    baris.appendChild(kolomHarga);
+
+    baris.appendChild(kolomJumlah);
+
+    baris.appendChild(kolomTotal);
+
+    baris.appendChild(kolomKategori);
+
+
+    // ================================
+    // MEMASUKKAN BARIS KE TABEL
+    // ================================
+
+    riwayatPesanan.appendChild(baris);
+
+
+    // ================================
+    // PESAN BERHASIL
+    // ================================
+
+    alert(
+        "Pesanan berhasil diterima!\n\n" +
+        "Nama: " + namaPelanggan + "\n" +
+        "Produk: " + namaLayanan[layananDipilih] + "\n" +
+        "Harga Satuan: Rp" +
+        hargaSatuan.toLocaleString("id-ID") + "\n" +
+        "Jumlah: " + beratLaundry + " kg\n" +
+        "Total: Rp" +
+        totalHarga.toLocaleString("id-ID")
+    );
+
+
+    // ================================
+    // RESET FORM
+    // ================================
+
+    orderForm.reset();
+
 });
