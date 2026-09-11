@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CleanWash Laundry</title>
+</head>
+
+<body>
+
+    <header>
+        <h1>CleanWash Laundry</h1>
+        <p>Jasa laundry cepat, bersih, dan terpercaya.</p>
+
+        <nav>
+            <a href="#home">Home</a> |
+            <a href="#layanan">Layanan</a> |
+            <a href="#harga">Daftar Harga</a> |
+            <a href="#pesanan">Form Pemesanan</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <section id="home">
+            <h2>Tentang CleanWash Laundry</h2>
+
+            <img src="https://images.unsplash.com/photo-1545173168-9f1947eebb7f?w=600"
+                 alt="Laundry">
+
+            <p>
+                CleanWash Laundry adalah usaha jasa laundry yang membantu
+                pelanggan mencuci dan merawat pakaian dengan praktis.
+            </p>
+
+            <p>
+                Kami menyediakan layanan laundry kiloan dan satuan dengan
+                proses yang cepat dan harga yang terjangkau.
+            </p>
+        </section>
+
+        <section id="layanan">
+            <h2>Layanan Kami</h2>
+
+            <ul>
+                <li>Laundry Kiloan</li>
+                <li>Cuci dan Setrika</li>
+                <li>Setrika Saja</li>
+                <li>Laundry Express</li>
+            </ul>
+        </section>
+
+        <section id="harga">
+            <h2>Daftar Harga</h2>
+
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Layanan</th>
+                        <th>Harga</th>
+                        <th>Estimasi</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>Laundry Kiloan</td>
+                        <td>Rp7.000/kg</td>
+                        <td>2-3 Hari</td>
+                    </tr>
+                    <tr>
+                        <td>Cuci + Setrika</td>
+                        <td>Rp9.000/kg</td>
+                        <td>2-3 Hari</td>
+                    </tr>
+                    <tr>
+                        <td>Setrika</td>
+                        <td>Rp5.000/kg</td>
+                        <td>1 Hari</td>
+                    </tr>
+                    <tr>
+                        <td>Express</td>
+                        <td>Rp12.000/kg</td>
+                        <td>1 Hari</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="pesanan">
+            <h2>Form Pemesanan Laundry</h2>
+
+            <form>
+
+                <label for="nama">Nama Pelanggan:</label><br>
+                <input type="text" id="nama" name="nama"
+                       placeholder="Masukkan nama Anda" required>
+                <br><br>
+
+                <label for="email">Email:</label><br>
+                <input type="email" id="email" name="email"
+                       placeholder="contoh@email.com" required>
+                <br><br>
+
+                <label for="telepon">Nomor Telepon:</label><br>
+                <input type="tel" id="telepon" name="telepon"
+                       placeholder="08xxxxxxxxxx" required>
+                <br><br>
+
+                <label for="layanan">Pilih Layanan:</label><br>
+                <select id="layanan" name="layanan" required>
+                    <option value="">-- Pilih Layanan --</option>
+                    <option value="kiloan">Laundry Kiloan</option>
+                    <option value="cuci-setrika">Cuci + Setrika</option>
+                    <option value="setrika">Setrika</option>
+                    <option value="express">Express</option>
+                </select>
+                <br><br>
+
+                <label for="berat">Berat Laundry (kg):</label><br>
+                <input type="number" id="berat" name="berat"
+                       placeholder="Masukkan berat laundry" min="1" required>
+                <br><br>
+
+                <label for="tanggal">Tanggal Pengantaran:</label><br>
+                <input type="date" id="tanggal" name="tanggal" required>
+                <br><br>
+
+                <label for="alamat">Alamat:</label><br>
+                <textarea id="alamat" name="alamat"
+                          placeholder="Masukkan alamat lengkap"
+                          rows="4" required></textarea>
+                <br><br>
+
+                <button type="submit">Kirim Pesanan</button>
+                <button type="reset">Reset</button>
+
+            </form>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 CleanWash Laundry. Semua Hak Dilindungi.</p>
+        <p>
+            Hubungi kami melalui
+            <a href="mailto:cleanwash@gmail.com">email CleanWash</a>
+        </p>
+    </footer>
+
+</body>
+</html>
